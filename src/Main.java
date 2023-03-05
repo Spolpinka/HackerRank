@@ -5,12 +5,15 @@ public class Main {
         System.out.println("Hello world!");
         Scanner sc = new Scanner(System.in);
         String s = sc.nextLine();
-        String[] array = s.split(";");
+        while (!s.equals("0")) {
+            s = sc.nextLine();
+            String[] array = s.split(";");
 
-        if (array[0].equals("S")) {
-            System.out.println(separate(array[2]));
-        } else {
-            combine(array);
+            if (array[0].equals("S")) {
+                System.out.println(separate(array[2]));
+            } else {
+                System.out.println(combine(array));
+            }
         }
 
     }
@@ -32,7 +35,17 @@ public class Main {
 
     private static String combine(String[] array) {
         String result = "";
-
+        String[] words = array[2].split(" ");
+        for (int i = 0; i < words.length; i++) {
+            if (!array[1].equals("C") && i == 0) {
+                result += words[0].toLowerCase();
+            } else {
+                String firstLetter = words[i].substring(0, 1).toUpperCase();
+                String word = words[i]. substring(1).toLowerCase();
+                result += firstLetter + word;
+            }
+        }
+        if (array[1].equals("M")) result += "()";
         return result;
     }
 
